@@ -9,11 +9,13 @@ namespace ConsoleApp1
         {
             var solution = new Solutions.Solution();
 
-            int result = solution.FindContentChildren(new int[] { 1, 2, 3 }, new int[] { 1, 1 });
-            Console.WriteLine($"Number of content children: {result}");
+            // int result = solution.FindContentChildren(new int[] { 1, 2, 3 }, new int[] { 1, 1 });
+            // Console.WriteLine($"Number of content children: {result}");
 
-            int maxConsecutiveOnes = solution.FindMaxConsecutiveOnes(new int[] { 1, 1, 0, 1, 1, 1, 0, 1, 1, 1 });
-            Console.WriteLine($"Maximum consecutive ones: {maxConsecutiveOnes}");
+            // int maxConsecutiveOnes = solution.FindMaxConsecutiveOnes(new int[] { 1, 1, 0, 1, 1, 1, 0, 1, 1, 1 });
+            // Console.WriteLine($"Maximum consecutive ones: {maxConsecutiveOnes}");
+
+            string formattedString = solution.LicenseKeyFormatting("2-5g-3-J", 2);
         }
     }
 }
@@ -50,16 +52,42 @@ namespace Solutions
 
             foreach (int num in nums)
             {
-                if(num == 1){
+                if (num == 1)
+                {
                     temp++;
-                }else {
+                }
+                else
+                {
                     temp = 0;
                 }
-                if(temp > maxNum){
+                if (temp > maxNum)
+                {
                     maxNum = temp;
                 }
             }
             return maxNum;
+        }
+
+        public string LicenseKeyFormatting(string s, int k)
+        {
+            s = s.ToUpper().Replace("-", "");
+            var res = "";
+            var count = 0;
+          
+            for (int i = s.Length - 1; i >= 0; i--)
+            {
+                res = s[i] + res;
+                count++;
+
+                if ((count == k && i != 0))
+                {
+                    res = "-" + res;
+                    count = 0;
+                }
+
+            }
+            Console.WriteLine($"Res: {res}");
+            return res;
         }
     }
 }
