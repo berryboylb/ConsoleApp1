@@ -16,6 +16,8 @@ namespace ConsoleApp1
             // Console.WriteLine($"Maximum consecutive ones: {maxConsecutiveOnes}");
 
             string formattedString = solution.LicenseKeyFormatting("2-5g-3-J", 2);
+
+            string base7 = solution.ConvertToBase7(0);
         }
     }
 }
@@ -73,7 +75,7 @@ namespace Solutions
             s = s.ToUpper().Replace("-", "");
             var res = "";
             var count = 0;
-          
+
             for (int i = s.Length - 1; i >= 0; i--)
             {
                 res = s[i] + res;
@@ -88,6 +90,24 @@ namespace Solutions
             }
             Console.WriteLine($"Res: {res}");
             return res;
+        }
+
+        public string ConvertToBase7(int num)
+        {
+            if (num == 0) return "0";
+            bool negative = num < 0;
+            string result = string.Empty;
+            int baseValue = 7;
+            num = Math.Abs(num);
+            while (num > 0)
+            {
+                int remainder = num % baseValue;
+                result = remainder.ToString() + result;
+                num /= baseValue;
+            }
+            Console.WriteLine($"Res: {result}");
+
+            return negative ? '-' + result : result;
         }
     }
 }
