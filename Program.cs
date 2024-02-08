@@ -15,9 +15,10 @@ namespace ConsoleApp1
             // int maxConsecutiveOnes = solution.FindMaxConsecutiveOnes(new int[] { 1, 1, 0, 1, 1, 1, 0, 1, 1, 1 });
             // Console.WriteLine($"Maximum consecutive ones: {maxConsecutiveOnes}");
 
-            string formattedString = solution.LicenseKeyFormatting("2-5g-3-J", 2);
+            // string formattedString = solution.LicenseKeyFormatting("2-5g-3-J", 2);
 
-            string base7 = solution.ConvertToBase7(0);
+            // string base7 = solution.ConvertToBase7(0);
+            string rev = solution.ReverseWords("Let's take LeetCode contest");
         }
     }
 }
@@ -108,6 +109,27 @@ namespace Solutions
             Console.WriteLine($"Res: {result}");
 
             return negative ? '-' + result : result;
+        }
+
+        public string ReverseWords(string s)
+        {
+            var arr = s.Split(" ");
+            string res = string.Empty;
+            for (int i = 0; i < arr.Length; i++)
+            {
+                for (int j = arr[i].Length - 1; j >= 0; j--)
+                {
+                    res += arr[i][j];
+                }
+
+                if (i < arr.Length - 1)
+                {
+                    res += " ";
+                }
+            }
+
+            Console.WriteLine($"Res: {res}");
+            return res;
         }
     }
 }
