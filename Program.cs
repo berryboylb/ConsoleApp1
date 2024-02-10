@@ -1,5 +1,7 @@
 ﻿
 using System;
+using System.Collections.Generic;
+
 
 namespace ConsoleApp1
 {
@@ -18,7 +20,8 @@ namespace ConsoleApp1
             // string formattedString = solution.LicenseKeyFormatting("2-5g-3-J", 2);
 
             // string base7 = solution.ConvertToBase7(0);
-            string rev = solution.ReverseWords("Let's take LeetCode contest");
+            // string rev = solution.ReverseWords("Let's take LeetCode contest");
+            int ways = solution.ClimbStairs(5);
         }
     }
 }
@@ -130,6 +133,29 @@ namespace Solutions
 
             Console.WriteLine($"Res: {res}");
             return res;
+        }
+        public int ClimbStairs(int n)
+        {
+            var ways = new Dictionary<int, int>()
+            {
+                {  0,  1 },
+                {  1,  1 }
+            };
+            for (int i = 2; i <= n; i++)
+            {
+                if (ways.TryGetValue(i - 1, out int prevStepWays) && ways.TryGetValue(i - 2, out int twoStepsBackWays))
+                {
+                    ways[i] = prevStepWays + twoStepsBackWays;
+                }
+                else
+                {
+                    ways[i] = 1;
+                }
+            }
+            ways.TryGetValue(n, out int result);
+
+            return result;
+
         }
     }
 }
