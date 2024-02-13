@@ -1,6 +1,6 @@
 ﻿
 using System;
-using System.Collections.Generic;
+using System.Collections.Generic;// this is for dictionaries
 
 
 namespace ConsoleApp1
@@ -21,7 +21,8 @@ namespace ConsoleApp1
 
             // string base7 = solution.ConvertToBase7(0);
             // string rev = solution.ReverseWords("Let's take LeetCode contest");
-            int ways = solution.ClimbStairs(5);
+            // int ways = solution.ClimbStairs(5);
+            bool match = solution.RotateString("abcde", "cdeab");
         }
     }
 }
@@ -156,6 +157,21 @@ namespace Solutions
 
             return result;
 
+        }
+
+        public bool RotateString(string s, string goal)
+        {
+            int i = 0;
+            while (i < goal.Length)
+            {
+                s = s[s.Length - 1] + s.Substring(0, s.Length - 1);
+                if (s.Equals(goal))
+                {
+                    return true;
+                }
+                i++;
+            }
+            return false;
         }
     }
 }
