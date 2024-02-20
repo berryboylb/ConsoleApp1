@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;// this is for dictionaries
+using System.Text; //for string builders
 
 
 namespace ConsoleApp1
@@ -22,7 +23,8 @@ namespace ConsoleApp1
             // string base7 = solution.ConvertToBase7(0);
             // string rev = solution.ReverseWords("Let's take LeetCode contest");
             // int ways = solution.ClimbStairs(5);
-            bool match = solution.RotateString("abcde", "cdeab");
+            // bool match = solution.RotateString("abcde", "cdeab");
+            int num = solution.Atoi("     +487   ");
         }
     }
 }
@@ -171,8 +173,78 @@ namespace Solutions
                 }
                 i++;
             }
+
             return false;
         }
+        public int Atoi(string s)
+        {
+            bool negative = false;
+            s = s.TrimStart();
+            StringBuilder digitsBuilder = new StringBuilder();
+            if (s.Length > 0)
+            {
+                if (s[0] == '-')
+                {
+                    negative = true;
+                    s = s.Substring(1);
+                }
+                else if (s[0] == '+')
+                {
+                    s = s.Substring(1);
+                }
+            }
+
+
+            foreach (char c in s)
+            {
+                if (c >= '0' && c <= '9')
+                {
+                    digitsBuilder.Append(c);
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            if (digitsBuilder.Length == 0)
+            {
+                return 0;
+            }
+
+            string digits = digitsBuilder.ToString();
+            int number;
+            bool success = Int32.TryParse(digits, out number);
+            if (!success)
+            {
+                if (negative)
+                {
+                    return int.MinValue;
+                }
+                else
+                {
+                    return Int32.MaxValue;
+                }
+            }
+
+            checked
+            {
+                number = negative ? -number : number;
+            }
+
+            if (number > Int32.MaxValue)
+            {
+                return Int32.MaxValue;
+            }
+            else if (number < -Int32.MaxValue)
+            {
+                return int.MinValue;
+            }
+
+            Console.WriteLine($"Res: {Int32.MaxValue}");
+            return number;
+        }
     }
+
 }
 
