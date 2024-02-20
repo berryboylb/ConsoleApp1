@@ -181,6 +181,7 @@ namespace Solutions
             bool negative = false;
             s = s.TrimStart();
             StringBuilder digitsBuilder = new StringBuilder();
+            
             if (s.Length > 0)
             {
                 if (s[0] == '-')
