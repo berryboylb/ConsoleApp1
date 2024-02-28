@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;// this is for dictionaries
 using System.Text; //for string builders
+// using System.Collections.IEnumerable; // using arrays
 
 
 namespace ConsoleApp1
@@ -24,7 +25,8 @@ namespace ConsoleApp1
             // string rev = solution.ReverseWords("Let's take LeetCode contest");
             // int ways = solution.ClimbStairs(5);
             // bool match = solution.RotateString("abcde", "cdeab");
-            int num = solution.Atoi("     +487   ");
+            // int num = solution.Atoi("     +487   ");
+            var res = solution.ConstructRectangle(4);
         }
     }
 }
@@ -244,6 +246,24 @@ namespace Solutions
 
             Console.WriteLine($"Res: {Int32.MaxValue}");
             return number;
+        }
+        public int[] ConstructRectangle(int area) {
+            int[] res = new int[]{0,0};
+            int max = Int32.MaxValue;
+            for(int width = 1; width <=  Math.Sqrt(area); width++){
+                if(area % width == 0){
+                    int length = area /width;
+                    int  diff = length - width;
+                    if(width <= length && diff < max){
+                        res[0] = length;
+                        res[1] = width;   
+                    }
+                   
+                }
+                
+            }
+             Console.WriteLine($"Res: {res}");
+            return res;
         }
     }
 
