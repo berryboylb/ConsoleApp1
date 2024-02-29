@@ -26,7 +26,8 @@ namespace ConsoleApp1
             // int ways = solution.ClimbStairs(5);
             // bool match = solution.RotateString("abcde", "cdeab");
             // int num = solution.Atoi("     +487   ");
-            var res = solution.ConstructRectangle(4);
+            // var res = solution.ConstructRectangle(4);
+            string res = solution.ConvertToTitle(1);
         }
     }
 }
@@ -183,7 +184,7 @@ namespace Solutions
             bool negative = false;
             s = s.TrimStart();
             StringBuilder digitsBuilder = new StringBuilder();
-            
+
             if (s.Length > 0)
             {
                 if (s[0] == '-')
@@ -247,23 +248,41 @@ namespace Solutions
             Console.WriteLine($"Res: {Int32.MaxValue}");
             return number;
         }
-        public int[] ConstructRectangle(int area) {
-            int[] res = new int[]{0,0};
+        public int[] ConstructRectangle(int area)
+        {
+            int[] res = new int[] { 0, 0 };
             int max = Int32.MaxValue;
-            for(int width = 1; width <=  Math.Sqrt(area); width++){
-                if(area % width == 0){
-                    int length = area /width;
-                    int  diff = length - width;
-                    if(width <= length && diff < max){
+            for (int width = 1; width <= Math.Sqrt(area); width++)
+            {
+                if (area % width == 0)
+                {
+                    int length = area / width;
+                    int diff = length - width;
+                    if (width <= length && diff < max)
+                    {
                         res[0] = length;
-                        res[1] = width;   
+                        res[1] = width;
                     }
-                   
                 }
-                
             }
-             Console.WriteLine($"Res: {res}");
             return res;
+        }
+        public string ConvertToTitle(int columnNumber)
+        {
+            string answer = "";
+            int baseValue = 26;
+            while (columnNumber > 0)
+            {
+                int code = columnNumber % baseValue;
+                if (code == 0)
+                {
+                    code = baseValue;
+                }
+                answer = ((char)(code + 64)) + answer;
+                columnNumber = (columnNumber - code) / baseValue;
+            }
+            Console.WriteLine($"Res: {answer}");
+            return answer;
         }
     }
 
