@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;// this is for dictionaries
 using System.Text; //for string builders
+using System.Text.RegularExpressions; //for regex
+using System.Linq;// for where clause in array of strings
 // using System.Collections.IEnumerable; // using arrays
 
 
@@ -27,7 +29,8 @@ namespace ConsoleApp1
             // bool match = solution.RotateString("abcde", "cdeab");
             // int num = solution.Atoi("     +487   ");
             // var res = solution.ConstructRectangle(4);
-            string res = solution.ConvertToTitle(1);
+            // string res = solution.ConvertToTitle(1);
+            string res = solution.MostCommonWord("a, a, a, a, b, b, b, c, c", new string[] { "a" });
         }
     }
 }
@@ -283,6 +286,18 @@ namespace Solutions
             }
             Console.WriteLine($"Res: {answer}");
             return answer;
+        }
+        public string MostCommonWord(string paragraph, string[] banned)
+        {
+            var res = Regex.Replace(paragraph.ToLower(), @"[^\w,]", " ") // Replace any character that is not a word character or comma with space
+            .Split(new char[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries) // Split by space or comma, removing empty entries
+            .Where(x => !banned.Contains(x)) // Filter out banned words
+            .GroupBy(x => x) // Group by word
+            .OrderByDescending(x => x.Count()) // Order by frequency
+            .First() // Select the first group (most common word)
+            .Key; // Get the word from the group
+
+            return res;
         }
     }
 
